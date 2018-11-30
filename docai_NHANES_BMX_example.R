@@ -20,6 +20,7 @@ bigData <- as.data.frame(bigData)
 # create survey design object for NHANES
 NHANES <- svydesign(id=~SDMVPSU, strata=~SDMVSTRA, nest=TRUE, weights=~WTMEC2YR, data=bigData)
 
+## mean
 # check a few:
 svymean(~BMXBMI,NHANES,na.rm=TRUE)[[1]] # 27.071
 svymean.2("BMXBMI","WTMEC2YR",bigData) # 27.071
@@ -29,3 +30,8 @@ svymean.2("BMXHEAD","WTMEC2YR",bigData) # 41.669
 
 svymean(~BMXHT,NHANES,na.rm=TRUE)[[1]] # 161.893
 svymean.2("BMXHT","WTMEC2YR",bigData) # 161.893
+
+## variance:
+svyvar(~BMXBMI,NHANES,na.rm=TRUE)[[1]] # 60.498
+svyvar(~BMXHEAD,NHANES,na.rm=TRUE)[[1]] # 6.489
+svyvar(~BMXHT,NHANES,na.rm=TRUE)[[1]] # 384.586
